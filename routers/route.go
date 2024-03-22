@@ -10,7 +10,7 @@ import (
 
 func StartServer(c controller.Controller) error {
 	port := config.GetConfigPort()
-	serverInfo := fmt.Sprintf("localhost:%s", port)
+	serverInfo := fmt.Sprintf("localhost%s", port)
 
 	r := gin.Default()
 
@@ -20,4 +20,5 @@ func StartServer(c controller.Controller) error {
 	r.DELETE("/orders/:orderId", c.DeleteOrder)
 
 	return r.Run(serverInfo)
+	// return r.Run()
 }

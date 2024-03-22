@@ -16,11 +16,13 @@ func Start() (Database, error) {
 
 	db, error := gorm.Open((postgres.Open(connection)), &gorm.Config{})
 	if error != nil {
+		fmt.Println("Error connecting to database")
 		return Database{}, error
 	}
 
 	// migrate
 	if error := db.Debug().AutoMigrate(&models.Order{}, &models.Item{}); error != nil {
+		fmt.Println("Error migrating database")
 		return Database{}, error
 	}
 
