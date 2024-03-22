@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"order-app/config"
+	"order-app/database"
 )
 
 func main() {
@@ -11,5 +12,7 @@ func main() {
 	config.GetConfigDB()
 	// print port
 	config.GetConfigPort()
+	// start db
+	database.Start()
 
 }
