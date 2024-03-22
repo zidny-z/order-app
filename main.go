@@ -2,17 +2,23 @@ package main
 
 import (
 	"fmt"
-	"order-app/config"
+	"order-app/controller"
 	"order-app/database"
+	router "order-app/routers"
 )
 
 func main() {
-	// print env
-	fmt.Println(config.GetConfigDB())	// print db config
-	config.GetConfigDB()
-	// print port
-	config.GetConfigPort()
-	// start db
-	database.Start()
+	db, err := database.Start()
+	if err != nil {
+		fmt.Println("Error starting database")
+		return
+	}
 
+	cont := controller.New(db)
+
+	err = router.StartServer(cont)
+	if err != nil {
+		fmt.Println("Error starting server")
+		return
+	}
 }
